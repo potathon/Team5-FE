@@ -6,6 +6,11 @@ const laundryDefault = '/assets/laundry.png';
 const laundryBlue = '/assets/laundry_blue.png';
 const shoppingDefault = '/assets/shopping.png';
 const shoppingPink = '/assets/shopping_pink.png';
+const editImage = '/assets/edit.png';
+const defaultImage = '/assets/defaultImage.png';
+const timeIcon = '/assets/time.png';
+const participantsIcon = '/assets/participants.png';
+const locationIcon = '/assets/location.png';
 
 interface CardProps {
   date: string;
@@ -28,20 +33,36 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div className="card">
-      <div className="card-header">
+      <div className="card-row">
         <div className="date">
           <span>{date.split(' ')[0]}</span>
           <span>{date.split(' ')[1]}</span>
         </div>
-        <div className="tag">{tag}</div>
-      </div>
-      <div className="card-content">
-        <h2>{title}</h2>
-        <p>
-          {time} | {participants}
-        </p>
-        <p>{location}</p>
-        {imageSrc && <img src={imageSrc} alt={title} className="card-image" />}
+        <div className="post-info">
+          <h2>{title}</h2>
+          <div className="info-row">
+            <img src={timeIcon} alt="time" className="icon-small" />
+            <p>{time}</p>
+          </div>
+          <div className="info-row">
+            <img
+              src={participantsIcon}
+              alt="participants"
+              className="icon-small"
+            />
+            <p>{participants}</p>
+          </div>
+          <div className="info-row">
+            <img src={locationIcon} alt="location" className="icon-small" />
+            <p>{location}</p>
+          </div>
+          <div className="tag">{tag}</div>
+        </div>
+        <img
+          src={imageSrc || defaultImage}
+          alt={title}
+          className="card-image"
+        />
       </div>
       <div className="actions">
         <button className="join-button">참여하기</button>
@@ -131,18 +152,7 @@ const MainPage: React.FC = () => {
         ))}
       </div>
       <button className="write-button">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.59 7.58L12.75 11.42L11.38 9.96L15.21 6.12L16.59 7.58ZM11.41 10.33L8.59 13.15L8 16H10.83L13.65 13.17L11.41 10.33Z"
-            fill="currentColor"
-          />
-        </svg>
+        <img src={editImage} alt="Shopping" className="icon" />
       </button>
     </div>
   );

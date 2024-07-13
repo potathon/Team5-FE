@@ -3,9 +3,7 @@ import './App.css';
 import MainPage from './pages/main/index.tsx';
 
 function App() {
-  return (
-    <MainPage />
-  );
+  return <MainPage />;
 }
 
 export default App;
