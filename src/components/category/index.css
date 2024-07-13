@@ -1,4 +1,5 @@
 .buttons-container {
+    margin-top: -30px;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -33,11 +34,18 @@
     margin-bottom: 50px;
   }
   
-  .icon-button {
+  .icon-button-left {
     border: none;
+    border-radius: 8px 0 0 8px;
     padding: 5px 20px;
   }
   
+  .icon-button-right {
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 5px 20px;
+  }
+
   .icon-button:hover {
     background-color: #E8F1FA;
   }
