@@ -1,0 +1,31 @@
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tag-label {
+    background-color: #49454F;
+    color: white;
+    border: none;
+    font-weight: 700;
+    margin: 5px;
+    padding: 5px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .icon-buttons-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .icon-button {
+    border: none;
+    padding: 5px 10px;
+  }
+  
+  .icon-button:hover {
+    background-color: #E8F1FA;
+  }
