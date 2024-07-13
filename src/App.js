@@ -1,14 +1,17 @@
-import './App.css';
-import MakePost from './pages/makePost';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/home';
+import MainPage from './pages/main';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <MakePost></MakePost>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/main" element={<MainPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
