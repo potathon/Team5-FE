@@ -12,18 +12,24 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 12px;
+  gap: 15px;
+  margin-left: -20px;
 }
 
 .date {
-  background-color: #2c2c2c;
+  background-color: #58a1e2;
   color: white;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
   text-align: center;
 }
 
 .card-content {
   margin-bottom: 12px;
+}
+.cardBigContent {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-content h2 {

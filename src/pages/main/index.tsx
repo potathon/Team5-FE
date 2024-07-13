@@ -26,6 +26,15 @@ const mockData = [
     max_count: 20,
     user_count: 15,
   },
+  {
+    id: 9,
+    title: 'Meeting 2',
+    content: 'Content for meeting 2',
+    meet_place: 'Place 2',
+    meet_time: '2024-07-15 14:00:00',
+    max_count: 20,
+    user_count: 15,
+  },
 ];
 
 const MainPage: React.FC = () => {
