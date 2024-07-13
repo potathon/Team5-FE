@@ -56,13 +56,23 @@
     margin-bottom: 20px;
   }
   
-  .button {
-    background-color: #fff;
+  .tag-label {
+    background-color: #49454F;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    font-weight: 700;
+    margin: 5px;
+    padding: 5px 15px;
+    border-radius: 4px;
     transition: background-color 0.3s;
+  }
+
+  .icon-buttons-container {
+    display: flex;
+    justify-content: center;
+  }
+  .icon-button {
+    border: none;
   }
   
   .button:hover {

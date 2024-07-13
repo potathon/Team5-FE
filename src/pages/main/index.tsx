@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 // import Modal from './Modal';
+
+const laundryDefault = '/assets/laundry.png';
+const laundryBlue = '/assets/laundry_blue.png';
+const shoppingDefault = '/assets/shopping.png';
+const shoppingPink = '/assets/shopping_pink.png';
 
 interface CardProps {
   date: string;
@@ -47,6 +52,14 @@ const Card: React.FC<CardProps> = ({
 };
 
 const MainPage: React.FC = () => {
+  const [laundryImage, setLaundryImage] = useState(laundryDefault);
+  const [shoppingImage, setShoppingImage] = useState(shoppingDefault);
+  const handleLaundryClick = () => {
+    setLaundryImage(laundryBlue);
+  };
+  const handleShoppingClick = () => {
+    setShoppingImage(shoppingPink);
+  };
   const posts = [
     {
       date: '7월 10',
@@ -83,8 +96,34 @@ const MainPage: React.FC = () => {
         <div className="divider"></div>
       </header>
       <div className="buttons-container">
-        <button className="button">#세탁</button>
-        <button className="button">#공구</button>
+        <div className="tag-label">#세탁</div>
+        <div className="tag-label">#공구</div>
+      </div>
+      <div className="icon-buttons-container">
+        <button
+          className="icon-button"
+          onClick={handleLaundryClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#E8F1FA';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#FFF';
+          }}
+        >
+          <img src={laundryImage} alt="Laundry" className="icon" />
+        </button>
+        <button
+          className="icon-button"
+          onClick={handleShoppingClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#FEF5FB';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#FFF';
+          }}
+        >
+          <img src={shoppingImage} alt="Shopping" className="icon" />
+        </button>
       </div>
       <div className="posts-container">
         {posts.map((post, index) => (
