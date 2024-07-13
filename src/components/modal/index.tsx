@@ -69,7 +69,7 @@ const Modal: React.FC<ModalProps> = ({
             <div className="input-group">
               <label htmlFor="phone">전화번호를 입력해주세요.</label>
               <div className="phone-input">
-                <span>010-</span>
+                <span>010 - </span>
                 <input
                   type="tel"
                   id="phone"
