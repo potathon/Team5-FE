@@ -27,9 +27,18 @@ const Card: React.FC<CardProps> = ({
   const [modalContent, setModalContent] = useState('');
   const [members, setMembers] = useState<string[]>([]);
 
-  const handleCapacityClick = () => {
+  const handleCapacityClick = async () => {
     setModalContent('참여자 목록');
     setShowMemberModal(true);
+
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/posts/${post_id}/users`,
+      );
+      setMembers(response.data.data.map((member: any) => member.name));
+    } catch (error) {
+      console.error('참여자 목록을 가져오는 데 실패했습니다:', error);
+    }
   };
 
   const handleJoinClick = () => {
@@ -38,11 +47,11 @@ const Card: React.FC<CardProps> = ({
   };
 
   const { post_id } = useParams();
-  const pressModalItem = async (name: string, phone: string) => {
+  const pressModalItem = async (user_name: string, user_phone: string) => {
     try {
       await axios.post(
         `http://localhost:8080/posts/${post_id}/join`,
-        JSON.stringify({ name, phone }),
+        JSON.stringify({ user_name, user_phone }),
         {
           headers: {
             'Content-Type': 'application/json',
@@ -54,6 +63,19 @@ const Card: React.FC<CardProps> = ({
       // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
     }
     setShowAgreeModal(false);
+  };
+  const pressModahhlItem = async (user_name: string, user_phone: string) => {
+    try {
+      await axios.delete(`http://localhost:8080/posts/${post_id}/users`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: { user_name, user_phone },
+      });
+    } catch (error) {
+      console.error('Error creating post:', error);
+      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
+    }
     setShowCancelModal(false);
   };
 
@@ -148,7 +170,7 @@ const Card: React.FC<CardProps> = ({
           contents={true}
           firstText={'예'}
           secondText={'아니오'}
-          firstPress={pressModalItem}
+          firstPress={pressModahhlItem}
         ></Modal>
       )}
     </div>

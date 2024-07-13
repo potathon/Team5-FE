@@ -18,14 +18,14 @@ const WriteButton: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = async (name: string, phone: string) => {
+  const handleSubmit = async (user_name: string, user_phone: string) => {
     // async 추가
     setIsModalOpen(false);
 
     try {
       await axios.post(
         'http://localhost:8080/posts',
-        JSON.stringify({ name, phone }),
+        JSON.stringify({ user_name, user_phone }),
         {
           headers: {
             'Content-Type': 'application/json',
