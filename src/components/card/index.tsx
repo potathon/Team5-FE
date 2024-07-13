@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
+import Modal from '../modal';
 
 interface CardProps {
   date: string;
@@ -18,26 +19,36 @@ const Card: React.FC<CardProps> = ({
   capacity,
   location,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showMemberModal, setShowMemberModal] = useState(false);
+  const [showAgreeModal, setShowAgreeModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
 
   const handleCapacityClick = () => {
-    setModalContent('인원 선택');
-    setShowModal(true);
+    setModalContent('참여자 목록');
+    setShowMemberModal(true);
   };
 
   const handleJoinClick = () => {
-    setModalContent('참여하기');
-    setShowModal(true);
+    setModalContent('참여하시겠습니까?');
+    setShowAgreeModal(true);
+  };
+
+  const pressModalItem = (name: string, phone: string) => {
+    console.log(`참여자 정보: 이름 - ${name}, 전화번호 - ${phone}`);
+    setShowAgreeModal(false);
+    setShowCancelModal(false);
   };
 
   const handleCancelClick = () => {
-    setModalContent('참여 취소');
-    setShowModal(true);
+    setModalContent('정말 참여를 취소하시겠습니까?');
+    setShowCancelModal(true);
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setShowMemberModal(false);
+    setShowAgreeModal(false);
+    setShowCancelModal(false);
   };
 
   return (
@@ -62,14 +73,41 @@ const Card: React.FC<CardProps> = ({
           참여 취소
         </button>
       </div>
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>{modalContent}</h2>
-            <p>여기에 모달 내용을 추가하세요.</p>
-            <button onClick={closeModal}>닫기</button>
-          </div>
-        </div>
+
+      {showMemberModal && (
+        <Modal
+          isOpen={showMemberModal}
+          onClose={closeModal}
+          title={modalContent}
+          buttons={true}
+        >
+          <p>미아</p>
+          <p>릴리</p>
+        </Modal>
+      )}
+
+      {showAgreeModal && (
+        <Modal
+          isOpen={showAgreeModal}
+          onClose={closeModal}
+          title={modalContent}
+          contents={true}
+          firstText={'참여하기'}
+          secondText={'참여취소'}
+          firstPress={pressModalItem}
+        ></Modal>
+      )}
+
+      {showCancelModal && (
+        <Modal
+          isOpen={showCancelModal}
+          onClose={closeModal}
+          title={modalContent}
+          contents={true}
+          firstText={'예'}
+          secondText={'아니오'}
+          firstPress={pressModalItem}
+        ></Modal>
       )}
     </div>
   );
