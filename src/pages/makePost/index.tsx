@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import Tag from '../../components/tag';
 import './index.css';
 
 const MakePost = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [location, setLocation] = useState('');
@@ -12,6 +15,18 @@ const MakePost = () => {
   const [peopleCount, setPeopleCount] = useState(1);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    // 모든 필수 필드가 채워졌는지 확인
+    const isValid =
+      title !== '' &&
+      content !== '' &&
+      location !== '' &&
+      selectedDate !== null &&
+      selectedTag !== null;
+    setIsFormValid(isValid);
+  }, [title, content, location, selectedDate, selectedTag]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -19,17 +34,31 @@ const MakePost = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // 작성 완료 시 처리 로직
-    console.log({
-      title,
-      content,
-      location,
-      selectedDate,
-      peopleCount,
-      selectedTag,
-      image,
-    });
+  const handleSubmit = async () => {
+    if (!isFormValid) return;
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('location', location);
+    formData.append('meetTime', selectedDate!.toISOString());
+    formData.append('maxCount', peopleCount.toString());
+    formData.append('tag', selectedTag!);
+    if (image) {
+      formData.append('image', image);
+    }
+
+    try {
+      await axios.post('/api/posts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      navigate('/main');
+    } catch (error) {
+      console.error('Error creating post:', error);
+      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
+    }
   };
 
   return (
@@ -91,10 +120,17 @@ const MakePost = () => {
         <Tag selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       </div>
       <div className="button-container">
-        <button onClick={handleSubmit} className="submit-button">
+        <button
+          //onClick={handleSubmit}
+          onClick={() => navigate('/main')}
+          className={`submit-button ${isFormValid ? '' : 'disabled'}`}
+          disabled={!isFormValid}
+        >
           작성 완료
         </button>
-        <button className="cancel-button">작성 취소</button>
+        <button className="cancel-button" onClick={() => navigate('/main')}>
+          작성 취소
+        </button>
       </div>
     </div>
   );
