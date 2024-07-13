@@ -19,7 +19,8 @@
 }
 
 .modal-title {
-  font-size: 1.2rem;
+  font-family: 'Pretendard-bold';
+  font-size: 1.4rem;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -70,6 +71,9 @@ h2 {
 
 .input-group {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 label {
@@ -78,7 +82,16 @@ label {
 }
 
 input[type='text'] {
-  width: 100%;
+  width: 200px;
+  height: 18px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type='tel'] {
+  width: 160px;
+  height: 18px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
