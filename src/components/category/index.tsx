@@ -21,8 +21,8 @@ const Category: React.FC = () => {
   return (
     <>
       <div className="buttons-container">
-        <div className="tag-label">#세탁</div>
-        <div className="tag-label">#공구</div>
+        <div className="tag-label-laundry">#세탁</div>
+        <div className="tag-label-shopping">#공구</div>
       </div>
       <div className="icon-buttons-container">
         <button
