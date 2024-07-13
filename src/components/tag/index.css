@@ -1,0 +1,23 @@
+.tag-container {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.selectedBlue {
+  background-color: #a9d4f1;
+  color: white;
+  border-color: #a9d4f1;
+}
+
+.selectedPink {
+  background-color: #f4c6da;
+  color: white;
+  border-color: #f4c6da;
+}

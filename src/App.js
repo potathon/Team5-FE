@@ -1,10 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import MainPage from './pages/main/index.tsx';
+import MakePost from './pages/makePost';
 
 function App() {
   return (
-    <MainPage />
+    <div className="App">
+      <header className="App-header">
+        <MakePost></MakePost>
+      </header>
+    </div>
   );
 }
 
