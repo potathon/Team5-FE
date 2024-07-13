@@ -52,26 +52,48 @@ const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <div className="card">
-      <div className="card-date">
-        <div className="card-month">{month}월</div>
-        <div className="card-day">{date}</div>
-      </div>
-      <div className="card-content">
-        <h2>{title}</h2>
-        <p>{time}</p>
-        <p className="capacity" onClick={handleCapacityClick}>
-          {capacity}
-        </p>
-        <p>{location}</p>
-      </div>
-      <div className="card-actions">
-        <button className="join-button" onClick={handleJoinClick}>
-          참여하기
-        </button>
-        <button className="cancel-button" onClick={handleCancelClick}>
-          참여 취소
-        </button>
+    <div className="card-page">
+      <div className="card">
+        <div className="card-header">
+          <div className="date">
+            <span>{month}월</span>
+            <span>{date}</span>
+          </div>
+        </div>
+        <div className="card-content">
+          <h2>{title}</h2>
+          <div className="img-container">
+            <img src="/assets/defaultImage.png" />
+          </div>
+          <div className="info-row">
+            <img src="/assets/time.png" alt="time" className="icon-small" />
+            <p>{time}</p>
+          </div>
+          <div className="info-row" onClick={handleCapacityClick}>
+            <img
+              src="/assets/participants.png"
+              alt="participants"
+              className="icon-small"
+            />
+            <p>{capacity}</p>
+          </div>
+          <div className="info-row">
+            <img
+              src="/assets/location.png"
+              alt="location"
+              className="icon-small"
+            />
+            <p>{location}</p>
+          </div>
+        </div>
+        <div className="card-actions">
+          <button className="join-button" onClick={handleJoinClick}>
+            참여하기
+          </button>
+          <button className="cancel-part-button" onClick={handleCancelClick}>
+            참여 취소
+          </button>
+        </div>
       </div>
 
       {showMemberModal && (
