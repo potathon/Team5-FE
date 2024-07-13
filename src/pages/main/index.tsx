@@ -10,14 +10,7 @@ const MainPage: React.FC = () => {
     <div className="main-page">
       <Header />
       <div className="logo">{/* 로고 이미지를 여기에 삽입하세요 */}</div>
-      <div className="tags">
-        <span className="tag tag-light">#세탁</span>
-        <span className="tag tag-dark">#공구</span>
-      </div>
-      <div className="icons">
-        <span className="icon icon-washer">🧺</span>
-        <span className="icon icon-bag">🛍️</span>
-      </div>
+      <Category />
       <main>
         <div className="card-grid">
           <Card
