@@ -47,9 +47,7 @@ const MainPage: React.FC = () => {
           />
         </div>
       </main>
-      <button className="floating-button">
-        <span className="pencil-icon">✏️</span>
-      </button>
+      <WriteButton />
     </div>
   );
 };
