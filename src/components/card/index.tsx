@@ -41,7 +41,7 @@ const Card: React.FC<CardProps> = ({
   const pressModalItem = async (name: string, phone: string) => {
     try {
       await axios.post(
-        `https://localhost:8080/posts/${post_id}/join`,
+        `http://localhost:8080/posts/${post_id}/join`,
         JSON.stringify({ name, phone }),
         {
           headers: {

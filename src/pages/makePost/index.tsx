@@ -50,7 +50,7 @@ const MakePost = () => {
     }
 
     try {
-      await axios.post('https://localhost:8080/posts', formData, {
+      await axios.post('http://localhost:8080/posts', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

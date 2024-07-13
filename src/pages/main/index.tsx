@@ -12,7 +12,7 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:8080/posts');
+        const response = await axios.get('http://localhost:8080/posts');
         setMeetings(response.data);
       } catch (error) {
         console.error('Error loading posts:', error);

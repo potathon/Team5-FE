@@ -28,7 +28,7 @@ const Category: React.FC = () => {
       setSelectedCategory(null);
       setPosts([]);
       try {
-        const response = await axios.get('https://localhost:8080/posts');
+        const response = await axios.get('http://localhost:8080/posts');
         setPosts(response.data);
       } catch (error) {
         console.error('Error loading posts:', error);
@@ -37,7 +37,7 @@ const Category: React.FC = () => {
       setSelectedCategory(category);
       try {
         const response = await axios.get(
-          `https://localhost:8080/posts/${category}`,
+          `http://localhost:8080/posts/${category}`,
         );
         setPosts(response.data.data);
       } catch (error) {
