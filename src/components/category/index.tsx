@@ -7,15 +7,18 @@ const shoppingDefault = '/assets/shopping.png';
 const shoppingPink = '/assets/shopping_pink.png';
 
 const Category: React.FC = () => {
-  const [laundryImage, setLaundryImage] = useState(laundryDefault);
-  const [shoppingImage, setShoppingImage] = useState(shoppingDefault);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const handleLaundryClick = () => {
-    setLaundryImage(laundryBlue);
-  };
-
-  const handleShoppingClick = () => {
-    setShoppingImage(shoppingPink);
+  const handleCategoryClick = (category: string) => {
+    if (selectedCategory === category) {
+      setSelectedCategory(null);
+      // API 요청: 선택 해제 시
+      // fetch('API_URL_TO_DESELECT', { method: 'POST', body: JSON.stringify({ category: null }) });
+    } else {
+      setSelectedCategory(category);
+      // API 요청: 선택 시
+      // fetch('API_URL_TO_SELECT', { method: 'POST', body: JSON.stringify({ category }) });
+    }
   };
 
   return (
@@ -26,8 +29,8 @@ const Category: React.FC = () => {
       </div>
       <div className="icon-buttons-container">
         <button
-          className="icon-button"
-          onClick={handleLaundryClick}
+          className="icon-button-left"
+          onClick={() => handleCategoryClick('laundry')}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#E8F1FA';
           }}
@@ -35,11 +38,15 @@ const Category: React.FC = () => {
             e.currentTarget.style.backgroundColor = '#FFF';
           }}
         >
-          <img src={laundryImage} alt="Laundry" className="icon" />
+          <img
+            src={selectedCategory === 'laundry' ? laundryBlue : laundryDefault}
+            alt="Laundry"
+            className="icon"
+          />
         </button>
         <button
-          className="icon-button"
-          onClick={handleShoppingClick}
+          className="icon-button-right"
+          onClick={() => handleCategoryClick('shopping')}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#FEF5FB';
           }}
@@ -47,7 +54,13 @@ const Category: React.FC = () => {
             e.currentTarget.style.backgroundColor = '#FFF';
           }}
         >
-          <img src={shoppingImage} alt="Shopping" className="icon" />
+          <img
+            src={
+              selectedCategory === 'shopping' ? shoppingPink : shoppingDefault
+            }
+            alt="Shopping"
+            className="icon"
+          />
         </button>
       </div>
     </>
