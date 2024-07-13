@@ -10,14 +10,14 @@ const Tag: React.FC<TagProps> = ({ selectedTag, setSelectedTag }) => {
   return (
     <div className="tag-container">
       <button
-        onClick={() => setSelectedTag('세탁')}
-        className={selectedTag === '세탁' ? 'selectedBlue' : ''}
+        onClick={() => setSelectedTag('laundry')}
+        className={selectedTag === 'laundry' ? 'selectedBlue' : ''}
       >
         #세탁
       </button>
       <button
-        onClick={() => setSelectedTag('공구')}
-        className={selectedTag === '공구' ? 'selectedPink' : ''}
+        onClick={() => setSelectedTag('buy')}
+        className={selectedTag === 'buy' ? 'selectedPink' : ''}
       >
         #공구
       </button>

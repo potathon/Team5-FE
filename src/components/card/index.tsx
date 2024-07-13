@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './index.css';
 import Modal from '../modal';
+import Tag from '../tag';
 
 interface CardProps {
   date: string;
@@ -83,6 +84,12 @@ const Card: React.FC<CardProps> = ({
               />
               <p>{location}</p>
             </div>
+            <Tag
+              selectedTag={null}
+              setSelectedTag={function (tag: string | null): void {
+                throw new Error('Function not implemented.');
+              }}
+            ></Tag>
           </div>
           <div className="img-container">
             <img src="/assets/defaultImage.png" />

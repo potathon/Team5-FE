@@ -41,18 +41,18 @@ const MakePost = () => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('location', location);
-    formData.append('meetTime', selectedDate!.toISOString());
-    formData.append('maxCount', peopleCount.toString());
+    formData.append('meet_place', location);
+    formData.append('meet_time', selectedDate!.toISOString());
+    formData.append('max_count', peopleCount.toString());
     formData.append('tag', selectedTag!);
     if (image) {
       formData.append('image', image);
     }
 
     try {
-      await axios.post('/api/posts', formData, {
+      await axios.post('https://localhost:8080/posts', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
       });
       navigate('/main');
@@ -124,8 +124,7 @@ const MakePost = () => {
         </div>
         <div className="button-container">
           <button
-            //onClick={handleSubmit}
-            onClick={() => navigate('/main')}
+            onClick={handleSubmit}
             className={`submit-button ${isFormValid ? '' : 'disabled'}`}
             disabled={!isFormValid}
           >
