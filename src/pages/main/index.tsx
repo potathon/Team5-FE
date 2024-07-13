@@ -1,21 +1,23 @@
 import React from 'react';
 import Card from '../../components/card';
 import './index.css';
+import Category from '../../components/category';
+import Header from '../../components/header';
+import WriteButton from '../../components/write-button';
 
 const MainPage: React.FC = () => {
   return (
     <div className="main-page">
-      <header>
-        <div className="logo">{/* 로고 이미지를 여기에 삽입하세요 */}</div>
-        <div className="tags">
-          <span className="tag tag-light">#세탁</span>
-          <span className="tag tag-dark">#공구</span>
-        </div>
-        <div className="icons">
-          <span className="icon icon-washer">🧺</span>
-          <span className="icon icon-bag">🛍️</span>
-        </div>
-      </header>
+      <Header />
+      <div className="logo">{/* 로고 이미지를 여기에 삽입하세요 */}</div>
+      <div className="tags">
+        <span className="tag tag-light">#세탁</span>
+        <span className="tag tag-dark">#공구</span>
+      </div>
+      <div className="icons">
+        <span className="icon icon-washer">🧺</span>
+        <span className="icon icon-bag">🛍️</span>
+      </div>
       <main>
         <div className="card-grid">
           <Card
