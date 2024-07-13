@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../components/card';
 import './index.css';
 
@@ -67,7 +68,10 @@ const MainPage: React.FC = () => {
           })}
         </div>
       </main>
-      <button className="floating-button">
+      <button
+        className="floating-button"
+        onClick={() => navigate('/make-post')}
+      >
         <span className="pencil-icon">✏️</span>
       </button>
     </div>
