@@ -59,31 +59,33 @@ const Card: React.FC<CardProps> = ({
             <span>{month}월</span>
             <span>{date}</span>
           </div>
+          <h2 className="cardTitle">{title}</h2>
         </div>
-        <div className="card-content">
-          <h2>{title}</h2>
+        <div className="cardBigContent">
+          <div className="card-content">
+            <div className="info-row">
+              <img src="/assets/time.png" alt="time" className="icon-small" />
+              <p>{time}</p>
+            </div>
+            <div className="info-row" onClick={handleCapacityClick}>
+              <img
+                src="/assets/participants.png"
+                alt="participants"
+                className="icon-small"
+              />
+              <p>{capacity}</p>
+            </div>
+            <div className="info-row">
+              <img
+                src="/assets/location.png"
+                alt="location"
+                className="icon-small"
+              />
+              <p>{location}</p>
+            </div>
+          </div>
           <div className="img-container">
             <img src="/assets/defaultImage.png" />
-          </div>
-          <div className="info-row">
-            <img src="/assets/time.png" alt="time" className="icon-small" />
-            <p>{time}</p>
-          </div>
-          <div className="info-row" onClick={handleCapacityClick}>
-            <img
-              src="/assets/participants.png"
-              alt="participants"
-              className="icon-small"
-            />
-            <p>{capacity}</p>
-          </div>
-          <div className="info-row">
-            <img
-              src="/assets/location.png"
-              alt="location"
-              className="icon-small"
-            />
-            <p>{location}</p>
           </div>
         </div>
         <div className="card-actions">
