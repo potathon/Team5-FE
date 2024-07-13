@@ -1,11 +1,10 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import { useParams } from 'react-router-dom';
 import Modal from '../modal';
 
 interface CardProps {
-  postId: number;
   date: string;
   month: string;
   title: string;
@@ -38,6 +37,7 @@ const Card: React.FC<CardProps> = ({
     setShowAgreeModal(true);
   };
 
+  const { post_id } = useParams();
   const pressModalItem = async (name: string, phone: string) => {
     try {
       await axios.post(
