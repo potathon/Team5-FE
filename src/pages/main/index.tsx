@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './index.css';
-import Category from '../../components/category';
-import Header from '../../components/header';
-import WriteButton from '../../components/write-button';
+// import Modal from './Modal';
 
+const laundryDefault = '/assets/laundry.png';
+const laundryBlue = '/assets/laundry_blue.png';
+const shoppingDefault = '/assets/shopping.png';
+const shoppingPink = '/assets/shopping_pink.png';
+const editImage = '/assets/edit.png';
 const defaultImage = '/assets/defaultImage.png';
 const timeIcon = '/assets/time.png';
 const participantsIcon = '/assets/participants.png';
@@ -28,11 +31,6 @@ const Card: React.FC<CardProps> = ({
   tag,
   imageSrc,
 }) => {
-  const tagStyle = {
-    backgroundColor:
-      tag === '#세탁' ? '#A9D4F1' : tag === '#공구' ? '#F4C6DA' : '#E8F1FA',
-  };
-
   return (
     <div className="card">
       <div className="card-row">
@@ -42,27 +40,23 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="post-info">
           <h2>{title}</h2>
-          <div className="info-col">
-            <div className="info-row">
-              <img src={timeIcon} alt="time" className="icon-small" />
-              <p>{time}</p>
-            </div>
-            <div className="info-row">
-              <img
-                src={participantsIcon}
-                alt="participants"
-                className="icon-small"
-              />
-              <p>{participants}</p>
-            </div>
+          <div className="info-row">
+            <img src={timeIcon} alt="time" className="icon-small" />
+            <p>{time}</p>
+          </div>
+          <div className="info-row">
+            <img
+              src={participantsIcon}
+              alt="participants"
+              className="icon-small"
+            />
+            <p>{participants}</p>
           </div>
           <div className="info-row">
             <img src={locationIcon} alt="location" className="icon-small" />
             <p>{location}</p>
           </div>
-          <div className="tag" style={tagStyle}>
-            {tag}
-          </div>
+          <div className="tag">{tag}</div>
         </div>
         <img
           src={imageSrc || defaultImage}
@@ -79,6 +73,14 @@ const Card: React.FC<CardProps> = ({
 };
 
 const MainPage: React.FC = () => {
+  const [laundryImage, setLaundryImage] = useState(laundryDefault);
+  const [shoppingImage, setShoppingImage] = useState(shoppingDefault);
+  const handleLaundryClick = () => {
+    setLaundryImage(laundryBlue);
+  };
+  const handleShoppingClick = () => {
+    setShoppingImage(shoppingPink);
+  };
   const posts = [
     {
       date: '7월 10',
@@ -100,16 +102,58 @@ const MainPage: React.FC = () => {
     },
   ];
 
+  // const history = useHistory();
+
+  // const handleWritePost = () => {
+  //   history.push('/makePost');
+  // };
+
   return (
     <div className="main-page">
-      <Header />
-      <Category />
+      <header className="header">
+        <div className="logo-container">
+          <h1 className="title">Roomie</h1>
+        </div>
+        <div className="divider"></div>
+      </header>
+      <div className="buttons-container">
+        <div className="tag-label">#세탁</div>
+        <div className="tag-label">#공구</div>
+      </div>
+      <div className="icon-buttons-container">
+        <button
+          className="icon-button"
+          onClick={handleLaundryClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#E8F1FA';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#FFF';
+          }}
+        >
+          <img src={laundryImage} alt="Laundry" className="icon" />
+        </button>
+        <button
+          className="icon-button"
+          onClick={handleShoppingClick}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#FEF5FB';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#FFF';
+          }}
+        >
+          <img src={shoppingImage} alt="Shopping" className="icon" />
+        </button>
+      </div>
       <div className="posts-container">
         {posts.map((post, index) => (
           <Card key={index} {...post} />
         ))}
       </div>
-      <WriteButton />
+      <button className="write-button">
+        <img src={editImage} alt="Shopping" className="icon" />
+      </button>
     </div>
   );
 };
