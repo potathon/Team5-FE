@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import { useParams } from 'react-router-dom';
 import Modal from '../modal';
 
 interface CardProps {
+  postId: number;
   date: string;
   month: string;
   title: string;
@@ -25,8 +26,7 @@ const Card: React.FC<CardProps> = ({
   const [showAgreeModal, setShowAgreeModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
-
-  const { post_id } = useParams();
+  const [members, setMembers] = useState<string[]>([]);
 
   const handleCapacityClick = () => {
     setModalContent('참여자 목록');
@@ -122,8 +122,9 @@ const Card: React.FC<CardProps> = ({
           title={modalContent}
           buttons={true}
         >
-          <p>미아</p>
-          <p>릴리</p>
+          {members.map((member, index) => (
+            <p key={index}>{member}</p>
+          ))}
         </Modal>
       )}
 
