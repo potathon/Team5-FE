@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import './index.css';
 import Modal from '../modal';
@@ -35,8 +36,21 @@ const Card: React.FC<CardProps> = ({
     setShowAgreeModal(true);
   };
 
-  const pressModalItem = (name: string, phone: string) => {
-    console.log(`참여자 정보: 이름 - ${name}, 전화번호 - ${phone}`);
+  const pressModalItem = async (name: string, phone: string) => {
+    try {
+      await axios.post(
+        'https://localhost:8080/posts/{post_id}/join',
+        JSON.stringify({ name, phone }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+    } catch (error) {
+      console.error('Error creating post:', error);
+      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
+    }
     setShowAgreeModal(false);
     setShowCancelModal(false);
   };

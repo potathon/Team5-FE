@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/modal';
@@ -17,10 +18,25 @@ const WriteButton: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = (name: string, phone: string) => {
+  const handleSubmit = async (name: string, phone: string) => {
+    // async 추가
     setIsModalOpen(false);
-    console.log('Name:', name, 'Phone:', phone);
-    navigate('/make-post');
+
+    try {
+      await axios.post(
+        'https://localhost:8080/posts',
+        JSON.stringify({ name, phone }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      navigate('/make-post');
+    } catch (error) {
+      console.error('Error creating post:', error);
+      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
+    }
   };
 
   return (
