@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './index.css';
+import { useParams } from 'react-router-dom';
 import Modal from '../modal';
 import Tag from '../tag';
 
@@ -26,6 +27,8 @@ const Card: React.FC<CardProps> = ({
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
 
+  const { post_id } = useParams();
+
   const handleCapacityClick = () => {
     setModalContent('참여자 목록');
     setShowMemberModal(true);
@@ -39,7 +42,7 @@ const Card: React.FC<CardProps> = ({
   const pressModalItem = async (name: string, phone: string) => {
     try {
       await axios.post(
-        'https://localhost:8080/posts/{post_id}/join',
+        `https://localhost:8080/posts/${post_id}/join`,
         JSON.stringify({ name, phone }),
         {
           headers: {
