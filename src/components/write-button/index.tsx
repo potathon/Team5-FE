@@ -23,6 +23,7 @@ const WriteButton: React.FC = () => {
     setIsModalOpen(false);
 
     try {
+      navigate('/make-post');
       await axios.post(
         'http://localhost:8080/posts',
         JSON.stringify({ user_name, user_phone }),
@@ -32,7 +33,6 @@ const WriteButton: React.FC = () => {
           },
         },
       );
-      navigate('/make-post');
     } catch (error) {
       console.error('Error creating post:', error);
       // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)

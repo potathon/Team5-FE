@@ -22,7 +22,7 @@ input[type='text'],
 textarea,
 input[type='file'],
 .react-datepicker-wrapper {
-  width: 90%;
+  width: 95%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
