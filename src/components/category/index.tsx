@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
 const laundryDefault = '/assets/laundry.png';
@@ -6,18 +7,42 @@ const laundryBlue = '/assets/laundry_blue.png';
 const shoppingDefault = '/assets/shopping.png';
 const shoppingPink = '/assets/shopping_pink.png';
 
+interface Post {
+  id: number;
+  title: string;
+  tag: string;
+  meet_time: string;
+  meet_place: string;
+  max_recruit: number;
+  image: string;
+  created_at: string;
+  group_is_max: boolean;
+}
+
 const Category: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = async (category: string) => {
     if (selectedCategory === category) {
       setSelectedCategory(null);
-      // API 요청: 선택 해제 시
-      // fetch('API_URL_TO_DESELECT', { method: 'POST', body: JSON.stringify({ category: null }) });
+      setPosts([]);
+      try {
+        const response = await axios.get('https://localhost:8080/posts');
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error loading posts:', error);
+      }
     } else {
       setSelectedCategory(category);
-      // API 요청: 선택 시
-      // fetch('API_URL_TO_SELECT', { method: 'POST', body: JSON.stringify({ category }) });
+      try {
+        const response = await axios.get(
+          `https://localhost:8080/posts/${category}`,
+        );
+        setPosts(response.data.data);
+      } catch (error) {
+        console.error(`Error fetching ${category} posts:`, error);
+      }
     }
   };
 
@@ -46,7 +71,7 @@ const Category: React.FC = () => {
         </button>
         <button
           className="icon-button-right"
-          onClick={() => handleCategoryClick('shopping')}
+          onClick={() => handleCategoryClick('Buy')}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#FEF5FB';
           }}
@@ -55,13 +80,24 @@ const Category: React.FC = () => {
           }}
         >
           <img
-            src={
-              selectedCategory === 'shopping' ? shoppingPink : shoppingDefault
-            }
+            src={selectedCategory === 'Buy' ? shoppingPink : shoppingDefault}
             alt="Shopping"
             className="icon"
           />
         </button>
+      </div>
+      <div className="posts-container">
+        {posts.map((post) => (
+          <div key={post.id} className="post-card">
+            <img src={post.image} alt={post.title} className="post-image" />
+            <div className="post-info">
+              <h3>{post.title}</h3>
+              <p>{post.meet_place}</p>
+              <p>{new Date(post.meet_time).toLocaleString()}</p>
+              <p>모집 인원: {post.max_recruit}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );
