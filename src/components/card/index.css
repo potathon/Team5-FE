@@ -49,6 +49,7 @@
 
 .join-button,
 .cancel-button {
+  font-family: 'Pretendard-bold';
   padding: 8px 28px;
   border: none;
   border-radius: 4px;
@@ -56,13 +57,11 @@
 }
 
 .join-button {
-  font-family: 'Pretendard-bold';
   background-color: #2c2c2c;
   color: white;
 }
 
 .cancel-button {
-  font-family: 'Pretendard-bold';
   background-color: #d9d9d9;
   color: black;
 }
