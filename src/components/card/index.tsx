@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Modal from '../modal';
 
 interface CardProps {
+  postId?: string;
   date: string;
   month: string;
   title: string;
@@ -14,6 +15,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({
+  postId,
   date,
   month,
   title,
@@ -33,7 +35,7 @@ const Card: React.FC<CardProps> = ({
 
     try {
       const response = await axios.get(
-        `http://localhost:8080/posts/${post_id}/users`,
+        `http://localhost:8080/posts/${postId}/users`,
       );
       setMembers(response.data.data.map((member: any) => member.name));
     } catch (error) {
@@ -46,11 +48,10 @@ const Card: React.FC<CardProps> = ({
     setShowAgreeModal(true);
   };
 
-  const { post_id } = useParams();
   const pressModalItem = async (user_name: string, user_phone: string) => {
     try {
       await axios.post(
-        `http://localhost:8080/posts/${post_id}/join`,
+        `http://localhost:8080/posts/${postId}/join`,
         JSON.stringify({ user_name, user_phone }),
         {
           headers: {
@@ -66,7 +67,7 @@ const Card: React.FC<CardProps> = ({
   };
   const pressModahhlItem = async (user_name: string, user_phone: string) => {
     try {
-      await axios.delete(`http://localhost:8080/posts/${post_id}/users`, {
+      await axios.delete(`http://localhost:8080/posts/${postId}/users`, {
         headers: {
           'Content-Type': 'application/json',
         },
