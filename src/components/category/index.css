@@ -5,25 +5,37 @@
     margin-bottom: 20px;
   }
   
-  .tag-label {
-    background-color: #49454F;
-    color: white;
+  .tag-label-laundry {
+    background-color: #EEEFF0;
+    color: #49454F;
     border: none;
+    border-radius: 20px;
     font-weight: 700;
     margin: 5px;
     padding: 5px 15px;
-    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+
+  .tag-label-shopping {
+    background-color: #49454F;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    margin: 5px;
+    padding: 5px 15px;
     transition: background-color 0.3s;
   }
   
   .icon-buttons-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
   }
   
   .icon-button {
     border: none;
-    padding: 5px 10px;
+    padding: 5px 20px;
   }
   
   .icon-button:hover {
