@@ -16,7 +16,6 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({
-  postId,
   date,
   month,
   title,
@@ -69,27 +68,6 @@ const Card: React.FC<CardProps> = ({
     setShowMemberModal(false);
     setShowAgreeModal(false);
     setShowCancelModal(false);
-  };
-
-  const handleConfirmCancel = (name: string, phone: string) => {
-    const url = `/posts/${postId}/users/`;
-
-    axios
-      .delete(url, {
-        data: {
-          user_name: name,
-          user_contact: phone,
-        },
-      })
-      .then((response) => {
-        console.log('탈퇴 요청 성공:', response.data);
-        // Handle successful response
-        setShowCancelModal(false);
-      })
-      .catch((error) => {
-        console.error('탈퇴 요청 실패:', error);
-        // Handle error
-      });
   };
 
   return (
