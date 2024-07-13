@@ -96,32 +96,39 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
   }
   
   .card-row {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
   
   .date {
+    font-size: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
+    justify-content: center;
     background-color: #2C2C2C;
     color: white;
     border-radius: 4px;
-    padding: 5px 10px;
+    height: 70px;
+    width: 50px;
   }
   
   .post-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 0;
   }
   
+  .info-col {
+    display: flex;
+    flex-direction: row;
+  }
   .info-row {
     display: flex;
     align-items: center;
