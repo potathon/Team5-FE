@@ -63,12 +63,7 @@ const MainPage: React.FC = () => {
           })}
         </div>
       </main>
-      <button
-        className="floating-button"
-        onClick={() => navigate('/make-post')}
-      >
-        <span className="pencil-icon">✏️</span>
-      </button>
+      <WriteButton />
     </div>
   );
 };
