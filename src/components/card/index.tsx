@@ -6,6 +6,7 @@ import Modal from '../modal';
 
 interface CardProps {
   postId: string;
+
   date: string;
   month: string;
   title: string;

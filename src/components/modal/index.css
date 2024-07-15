@@ -82,7 +82,7 @@ label {
 }
 
 input[type='text'] {
-  width: 100px;
+  width: 95%;
   height: 18px;
   border: 1px solid #ccc;
   border-radius: 4px;

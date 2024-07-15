@@ -13,6 +13,7 @@ const MainPage: React.FC = () => {
 
   const { postId } = useParams<{ postId: string }>();
 
+
   const fetchData = async (category: string | null) => {
     try {
       const url = category
@@ -33,6 +34,7 @@ const MainPage: React.FC = () => {
       <Header />
       <div className="content">
         <Category onCategoryChange={setSelectedCategory} />
+
         <main>
           <div className="card-grid">
             {meetings.map((meeting) => {

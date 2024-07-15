@@ -25,6 +25,7 @@ const WriteButton: React.FC = () => {
 
     try {
       const response = await axios.post(
+
         'http://localhost:8080/posts',
         JSON.stringify({ user_name, phone }),
         {
