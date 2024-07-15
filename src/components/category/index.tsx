@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 
 const laundryDefault = '/assets/laundry.png';
@@ -10,7 +9,6 @@ const shoppingPink = '/assets/shopping_pink.png';
 interface Post {
   id: number;
   title: string;
-  tag: string;
   meet_time: string;
   meet_place: string;
   max_recruit: number;
@@ -19,33 +17,19 @@ interface Post {
   group_is_max: boolean;
 }
 
-const Category: React.FC = () => {
+interface CategoryProps {
+  onCategoryChange: (category: string | null) => void;
+}
+
+const Category: React.FC<CategoryProps> = ({ onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
 
   const handleCategoryClick = async (category: string) => {
-    if (selectedCategory === category) {
-      setSelectedCategory(null);
-      setPosts([]);
-      try {
-        const response = await axios.get('http://localhost:8080/posts');
-        setPosts(response.data);
-      } catch (error) {
-        console.error('Error loading posts:', error);
-      }
-    } else {
-      setSelectedCategory(category);
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/posts/${category}`,
-        );
-        setPosts(response.data.data);
-      } catch (error) {
-        console.error(`Error fetching ${category} posts:`, error);
-      }
-    }
+    const newCategory = selectedCategory === category ? null : category;
+    setSelectedCategory(newCategory);
+    onCategoryChange(newCategory);
   };
-
   return (
     <>
       <div className="buttons-container">
@@ -71,7 +55,7 @@ const Category: React.FC = () => {
         </button>
         <button
           className="icon-button-right"
-          onClick={() => handleCategoryClick('Buy')}
+          onClick={() => handleCategoryClick('buy')}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#FEF5FB';
           }}
@@ -80,7 +64,7 @@ const Category: React.FC = () => {
           }}
         >
           <img
-            src={selectedCategory === 'Buy' ? shoppingPink : shoppingDefault}
+            src={selectedCategory === 'buy' ? shoppingPink : shoppingDefault}
             alt="Shopping"
             className="icon"
           />

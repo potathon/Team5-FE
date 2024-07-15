@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import Modal from '../modal';
 
 interface CardProps {
-  postId?: string;
+  postId: string;
+
   date: string;
   month: string;
   title: string;
@@ -30,6 +31,11 @@ const Card: React.FC<CardProps> = ({
   const [members, setMembers] = useState<string[]>([]);
 
   const handleCapacityClick = async () => {
+    if (!postId) {
+      console.error('Error: postId is undefined');
+      return;
+    }
+
     setModalContent('참여자 목록');
     setShowMemberModal(true);
 
@@ -37,7 +43,8 @@ const Card: React.FC<CardProps> = ({
       const response = await axios.get(
         `http://localhost:8080/posts/${postId}/users`,
       );
-      setMembers(response.data.data.map((member: any) => member.name));
+      setMembers(response.data.map((member: any) => member.name));
+      console.log('성공', members);
     } catch (error) {
       console.error('참여자 목록을 가져오는 데 실패했습니다:', error);
     }
@@ -49,6 +56,11 @@ const Card: React.FC<CardProps> = ({
   };
 
   const pressModalItem = async (user_name: string, user_phone: string) => {
+    if (!postId) {
+      console.error('Error: postId is undefined');
+      return;
+    }
+
     try {
       await axios.post(
         `http://localhost:8080/posts/${postId}/join`,
@@ -59,13 +71,18 @@ const Card: React.FC<CardProps> = ({
           },
         },
       );
+      setShowAgreeModal(false);
     } catch (error) {
       console.error('Error creating post:', error);
-      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
     }
-    setShowAgreeModal(false);
   };
+
   const pressModahhlItem = async (user_name: string, user_phone: string) => {
+    if (!postId) {
+      console.error('Error: postId is undefined');
+      return;
+    }
+
     try {
       await axios.delete(`http://localhost:8080/posts/${postId}/users`, {
         headers: {
@@ -73,11 +90,10 @@ const Card: React.FC<CardProps> = ({
         },
         data: { user_name, user_phone },
       });
+      setShowCancelModal(false);
     } catch (error) {
       console.error('Error creating post:', error);
-      // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
     }
-    setShowCancelModal(false);
   };
 
   const handleCancelClick = () => {
@@ -125,7 +141,7 @@ const Card: React.FC<CardProps> = ({
             </div>
           </div>
           <div className="img-container">
-            <img src="/assets/defaultImage.png" />
+            <img src="/assets/defaultImage.png" alt="default" />
           </div>
         </div>
         <div className="card-actions">
@@ -145,9 +161,11 @@ const Card: React.FC<CardProps> = ({
           title={modalContent}
           buttons={true}
         >
-          {members.map((member, index) => (
-            <p key={index}>{member}</p>
-          ))}
+          {members.length > 0 ? (
+            members.map((member, index) => <p key={index}>{member}</p>)
+          ) : (
+            <p>참여자가 없습니다.</p>
+          )}
         </Modal>
       )}
 

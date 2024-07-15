@@ -9,26 +9,32 @@ import './index.css';
 
 const MainPage: React.FC = () => {
   const [meetings, setMeetings] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const { postId } = useParams<{ postId: string }>();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/posts');
-        setMeetings(response.data);
-      } catch (error) {
-        console.error('Error loading posts:', error);
-      }
-    };
 
-    fetchData();
-  }, []);
+
+  const fetchData = async (category: string | null) => {
+    try {
+      const url = category
+        ? `http://localhost:8080/posts/${category.toLowerCase()}`
+        : 'http://localhost:8080/posts';
+      const response = await axios.get(url);
+      setMeetings(response.data.data || response.data);
+    } catch (error) {
+      console.error('Error loading posts:', error);
+    }
+  };
+  useEffect(() => {
+    fetchData(selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <div className="main-page">
       <Header />
       <div className="content">
-        <Category />
+        <Category onCategoryChange={setSelectedCategory} />
+
         <main>
           <div className="card-grid">
             {meetings.map((meeting) => {
