@@ -43,7 +43,7 @@ const MakePost = () => {
     formData.append('content', content);
     formData.append('meet_place', location);
     formData.append('meet_time', selectedDate!.toISOString());
-    formData.append('max_count', peopleCount.toString());
+    formData.append('max_count', peopleCount.toString()); // peopleCount를 문자열로 변환하여 추가
     formData.append('tag', selectedTag!);
     if (image) {
       formData.append('image', image);
@@ -52,7 +52,7 @@ const MakePost = () => {
     try {
       await axios.post('http://localhost:8080/posts', formData, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
       });
       navigate('/main');
@@ -64,7 +64,7 @@ const MakePost = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <div className="container">
         <div className="form-group">
           <label>포스트 제목</label>
@@ -102,7 +102,7 @@ const MakePost = () => {
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
             showTimeSelect
-            dateFormat="Pp"
+            dateFormat="yyyy-MM-dd hh:mm:ss"
           />
         </div>
         <div className="form-group">

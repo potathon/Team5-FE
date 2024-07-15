@@ -18,21 +18,21 @@ const WriteButton: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = async (user_name: string, user_phone: string) => {
+  const handleSubmit = async (user_name: string, phone: string) => {
     // async 추가
     setIsModalOpen(false);
+    navigate('/make-post');
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'http://localhost:8080/posts',
-        JSON.stringify({ user_name, user_phone }),
+        JSON.stringify({ user_name, phone }),
         {
           headers: {
             'Content-Type': 'application/json',
           },
         },
       );
-      navigate('/make-post');
     } catch (error) {
       console.error('Error creating post:', error);
       // 에러 처리 로직 추가 (예: 사용자에게 에러 메시지 표시)
